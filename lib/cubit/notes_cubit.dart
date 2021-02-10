@@ -17,4 +17,9 @@ class NotesCubit extends Cubit<NotesState>{
     _notes.add(Note(++autoIncrementId, title, body));
     emit(NotesState(UnmodifiableListView(_notes)));
   }
+
+  void deleteNote(int id){
+    _notes = _notes.where((element) => element.id != id).toList();
+    emit(NotesState(UnmodifiableListView(_notes)));
+  }
 }
