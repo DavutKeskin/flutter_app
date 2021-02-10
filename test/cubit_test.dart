@@ -8,16 +8,28 @@ void main(){
       var cubit = NotesCubit();
       expect(cubit.state.notes, []);
     });
-  });
 
-  test("add notes", (){
-    var title = 'title';
-    var body = 'body';
-    var cubit = NotesCubit();
+    test("add notes", (){
+      var title = 'title';
+      var body = 'body';
+      var cubit = NotesCubit();
 
-    cubit.createNote(title, body);
-    expect(cubit.state.notes.length, 1);
-    expect(cubit.state.notes.first, Note(1, title, body));
+      cubit.createNote(title, body);
+      expect(cubit.state.notes.length, 1);
+      expect(cubit.state.notes.first, Note(1, title, body));
+
+    });
+
+    test("delete notes", (){
+      var cubit = NotesCubit();
+      cubit.createNote('title', 'body');
+      cubit.createNote('another title', 'another body');
+
+      cubit.deleteNote(1);
+
+      expect(cubit.state.notes.length, 1);
+      expect(cubit.state.notes.first.id, 2);
+    });
 
   });
 }
