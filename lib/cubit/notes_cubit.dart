@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:flutter_app/mode/note.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NotesState {
@@ -9,5 +10,11 @@ class NotesState {
 
 class NotesCubit extends Cubit<NotesState>{
   List _notes = [];
+  int  autoIncrementId = 0;
   NotesCubit (): super(NotesState(UnmodifiableListView([])));
+
+  void createNote(String title, String body){
+    _notes.add(Note(++autoIncrementId, title, body));
+    emit(NotesState(UnmodifiableListView(_notes)));
+  }
 }
