@@ -33,11 +33,14 @@ void main(){
 
     test("update notes", (){
       var cubit = NotesCubit();
-      cubit.createNote("title", "body");
+      cubit.createNote("first title", "first body");
+      cubit.createNote("second title", "second body");
 
-      cubit.updateCubit();
+      cubit.updateNote(cubit.state.notes.first.id ,"updated title" , "updated body");
 
       expect(cubit.state.notes.first.title, "updated title");
+      expect(cubit.state.notes.first, Note(1, "updated title","updated body"));
+      expect(cubit.state.notes.length, 2);
       expect(cubit.state.notes.first.id, 1);
     });
   });
