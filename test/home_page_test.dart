@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/cubit/notes_cubit.dart';
 import 'package:flutter_app/home_page.dart';
+import 'package:flutter_app/note_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -55,6 +56,17 @@ void main() {
       expect(find.byType(ListView), findsOneWidget);
       expect(find.byType(ListTile), findsOneWidget);
       expect(find.text(expectedTitle), findsNothing);
+    });
+
+    testWidgets('navigate to note page', (WidgetTester tester) async {
+      var notesCubit = NotesCubit();
+      await _pumpTestWidget(tester, notesCubit);
+
+      await tester.tap(find.byType(FloatingActionButton));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(NotePage), findsOneWidget);
+
     });
   });
 }

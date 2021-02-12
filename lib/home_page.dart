@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/cubit/notes_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'note_page.dart';
+
 void main() {
   runApp(MyHomePage());
 }
@@ -11,6 +13,15 @@ class MyHomePage extends StatelessWidget {
   final String title;
 
   MyHomePage({Key key, this.title, this.notesCubit}) : super(key: key);
+
+  _goToNotePage(BuildContext context) => Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NotePage(
+          notesCubit: notesCubit,
+        ),
+      ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +40,11 @@ class MyHomePage extends StatelessWidget {
                 subtitle: Text(note.body),
               );
             }),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _goToNotePage(context),
+        tooltip: 'Add',
+        child: Icon(Icons.add),
       ),
     );
   }
